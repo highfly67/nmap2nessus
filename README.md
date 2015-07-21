@@ -6,7 +6,7 @@ pip install requests --upgrade
 
 sudo python nmap2ness.py -h
 usage: nmap2ness.py [-h] [-s HOSTIP] [-n SCANID] [-u USERNAME] [-p PASSWORD]
-                    [-i INFILE] [-o OUTFILE]
+                    [-i INFILE] [-o OUTFILE] [-r SCANNAME]
 ```
 optional arguments:
   -h, --help   show this help message and exit
@@ -17,6 +17,7 @@ optional arguments:
   -i INFILE    [nmap xml file]
   -n SCANID    [lookup job based on scan_id (optional)]
   -o OUTFILE   [nessus report (csv) (optional)]
+  -r SCANNAME  [nessus scan name (optional)]  
 ```  
     
 #####Start a nessus scan by connecting to Nessus server 127.0.0.1  
