@@ -134,7 +134,10 @@ def list_scans(token):
 
 def add_scan(uuid,policy_id,targets,token):
 	headers=setHeaders(contentType="json",token=token)
-	data = {"uuid":uuid, "settings": {"policy_id": policy_id, "name": "Scan Name", "description": "Scan Description", "text_targets": targets}}
+	if options.scanname:
+		data = {"uuid":uuid, "settings": {"policy_id": policy_id, "name": options.scanname, "description": "Scan Description", "text_targets": targets}}
+	else:
+		data = {"uuid":uuid, "settings": {"policy_id": policy_id, "name": "Scan Name", "description": "Scan Description", "text_targets": targets}}
 	data = json.dumps(data)
 	r = requests.post(origUrl+"/scans", data=data, headers=headers, verify=verify)
 	data = json.loads(r.text)
@@ -228,6 +231,7 @@ if __name__== '__main__':
     	parser.add_argument('-t', dest='templatefile', action='store', help='[Nessus policy template to use (optional)]')  
     	parser.add_argument('-n', dest='scanid', action='store', help='[lookup job based on scan_id (optional)]')  
     	parser.add_argument('-o', dest='outfile', action='store', help='[nessus report (csv) (optional)]')  
+    	parser.add_argument('-r', dest='scanname', action='store', help='[set name of nessus scan (optional)]')  
 
     	if len(sys.argv)==1:
         	parser.print_help()
